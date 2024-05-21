@@ -24,7 +24,7 @@ export const userRepository = {
       const db = await sqliteConnection();
       const querySql =
         "SELECT * FROM users WHERE email = ?;";
-      const user = await db.run(querySql, [email]);
+      const user = await db.get(querySql, [email]);
 
       return user;
     } catch (error) {
