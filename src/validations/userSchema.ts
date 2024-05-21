@@ -32,4 +32,4 @@ export const userSchema = z
   })
   .strict();
 
-export type userDataType = z.infer<typeof userSchema>;
+export type UserDataType = z.infer<typeof userSchema>;

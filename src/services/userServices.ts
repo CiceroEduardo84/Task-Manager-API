@@ -1,14 +1,15 @@
 import { CreateUserDataType } from "../repositories/userRepository";
-import { userDataType } from "../validations/userSchema";
+import { UserDataType } from "../validations/userSchema";
 import { randomUUID } from "node:crypto";
 import { hash } from "bcrypt";
 
-type Repository = {
+export type UserRepositoryTypes = {
   createUser(data: CreateUserDataType): Promise<{} | undefined>
+  getUserByEmail(email: string): Promise<{} | undefined>
 }
 
 export const userServices = {
-  async create(data: userDataType, repository:Repository) {
+  async create(data: UserDataType, repository:UserRepositoryTypes) {
     try {
       const { name, email, password } = data;
 

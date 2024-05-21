@@ -1,7 +1,7 @@
 import { sqliteConnection } from "../databases/sqlite3";
-import { userDataType } from "../validations/userSchema";
+import { UserDataType } from "../validations/userSchema";
 
-export type CreateUserDataType = userDataType & { id: string };
+export type CreateUserDataType = UserDataType & { id: string };
 
 export const userRepository = {
   async createUser(data: CreateUserDataType) {
@@ -14,6 +14,19 @@ export const userRepository = {
       await db.run(querySql, [id, name, email, password]);
 
       return { id };
+    } catch (error) {
+      throw error;
+    }
+  },
+  
+  async getUserByEmail(email: string) {
+    try {
+      const db = await sqliteConnection();
+      const querySql =
+        "SELECT * FROM users WHERE email = ?;";
+      const user = await db.run(querySql, [email]);
+
+      return user;
     } catch (error) {
       throw error;
     }
