@@ -1,7 +1,7 @@
-import { CreateUserDataType } from "../repositories/userRepository";
 import { UserDataType } from "../validations/userSchema";
 import { randomUUID } from "node:crypto";
 import { hash } from "bcrypt";
+import { CreateUserDataType } from "../repositories/userRepository";
 
 export type UserRepositoryTypes = {
   createUser(data: CreateUserDataType): Promise<{} | undefined>
