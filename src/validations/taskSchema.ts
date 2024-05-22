@@ -32,4 +32,4 @@ export const taskSchema = z
   })
   .strict();
 
-export type taskDataType = z.infer<typeof taskSchema>;
+export type TaskDataType = z.infer<typeof taskSchema>;
