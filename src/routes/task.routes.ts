@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { taskControllers } from "../controllers/taskControllers";
+import { authMiddleware } from "../middleware/authMiddleware";
 
 export const tasksRoutes = Router();
 
-tasksRoutes.get("/tasks", taskControllers.read);
+tasksRoutes.post("/task", authMiddleware, taskControllers.create);

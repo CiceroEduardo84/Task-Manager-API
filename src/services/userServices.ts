@@ -5,7 +5,7 @@ import { CreateUserDataType } from "../repositories/userRepository";
 
 export type UserRepositoryTypes = {
   createUser(data: CreateUserDataType): Promise<{} | undefined>
-  getUserByEmail(email: string): Promise<{} | undefined>
+  getUserByEmail(email: string): Promise<CreateUserDataType | undefined>
 }
 
 export const userServices = {
