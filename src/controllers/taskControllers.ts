@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { taskSchema } from "../validations/taskSchema";
 import { taskServices } from "../services/taskServices";
 import { taskRepository } from "../repositories/taskRepository";
+import { paginationSchema } from "../validations/paginationSchema";
 
 export const taskControllers = {
   async create(req: Request, res: Response, next: NextFunction) {
@@ -24,11 +25,32 @@ export const taskControllers = {
     }
   },
 
+  async read(req: Request, res: Response, next: NextFunction) {
+    try {
+      const userID = req.userID;
+      const { limite, offset, filter } = paginationSchema.parse(req.query);
+
+      const userTasks = await taskServices.read(
+        {
+          userID,
+          limite,
+          offset,
+          filter,
+        },
+        taskRepository
+      );
+
+      return res.status(200).json({ message: "Task updated!", userTasks });
+    } catch (error) {
+      return next(error);
+    }
+  },
+
   async update(req: Request, res: Response, next: NextFunction) {
     try {
       const { title, description, date, status } = taskSchema.parse(req.body);
       const userID = req.userID;
-      const {taskId} = req.params;
+      const { taskId } = req.params;
       const task = {
         title,
         description,
@@ -37,7 +59,11 @@ export const taskControllers = {
         idUser: userID,
       };
 
-      const taskUpdate = await taskServices.update(taskId, task, taskRepository);
+      const taskUpdate = await taskServices.update(
+        taskId,
+        task,
+        taskRepository
+      );
 
       return res.status(200).json({ message: "Task updated!", taskUpdate });
     } catch (error) {
@@ -48,9 +74,13 @@ export const taskControllers = {
   async delete(req: Request, res: Response, next: NextFunction) {
     try {
       const userID = req.userID;
-      const {taskId} = req.params;
+      const { taskId } = req.params;
 
-      const taskDeleted = await taskServices.delete(taskId, userID, taskRepository);
+      const taskDeleted = await taskServices.delete(
+        taskId,
+        userID,
+        taskRepository
+      );
 
       return res.status(200).json({ message: "Task updated!", taskDeleted });
     } catch (error) {

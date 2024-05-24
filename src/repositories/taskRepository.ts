@@ -1,5 +1,8 @@
 import { sqliteConnection } from "../databases/sqlite3";
-import { CreateTaskDataTypes } from "../services/taskServices";
+import {
+  CreateTaskDataTypes,
+  UserTaskPagination,
+} from "../services/taskServices";
 
 type CreateTaskTypes = CreateTaskDataTypes & { id: string };
 
@@ -36,7 +39,7 @@ export const taskRepository = {
       const { id, title, description, date, status } = data;
 
       const db = await sqliteConnection();
-      const querySql =`
+      const querySql = `
         UPDATE tasks 
         SET title = ?, description = ?, date = ?, status = ?
         WHERE id = ?;
@@ -49,7 +52,7 @@ export const taskRepository = {
       throw error;
     }
   },
-  
+
   async deleteTask(id: string) {
     try {
       const db = await sqliteConnection();
@@ -58,6 +61,45 @@ export const taskRepository = {
       await db.run(querySql, [id]);
 
       return { id };
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getTasks(data: UserTaskPagination) {
+    try {
+      const { userID, filter, limite, offset } = data;
+
+      const db = await sqliteConnection();
+
+      if (filter == "all") {
+        const querySql = `
+        SELECT * FROM tasks 
+        WHERE id_user = ? 
+        ORDER BY created_at DESC
+        LIMIT ? OFFSET ?;
+      `;
+
+        const userTasks = await db.all(querySql, [userID, limite, offset]);
+
+        return userTasks;
+      } else {
+        const querySql = `
+        SELECT * FROM tasks 
+        WHERE id_user = ? AND status = ? 
+        ORDER BY created_at DESC
+        LIMIT ? OFFSET ?;
+      `;
+
+        const userTasks = await db.all(querySql, [
+          userID,
+          filter,
+          limite,
+          offset,
+        ]);
+
+        return userTasks;
+      }
     } catch (error) {
       throw error;
     }
