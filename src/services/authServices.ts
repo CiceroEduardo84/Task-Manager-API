@@ -19,7 +19,7 @@ export const authServices = {
         expiresIn: process.env.EXPIRESIN_TOKEN
       } );
 
-      return token;
+      return {token};
     } catch (error) {
       throw error;
     }
