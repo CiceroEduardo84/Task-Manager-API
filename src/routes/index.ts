@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { authRoutes } from "./auth.routes";
 import { userRoutes } from "./user.routes";
-import { tasksRoutes } from "./task.routes";
+import { taskRoutes } from "./task.routes";
 
-export const routers = Router();
+export const routes = Router();
 
-routers.use(authRoutes);
-routers.use(userRoutes);
-routers.use(tasksRoutes);
+routes.use(authRoutes);
+routes.use(userRoutes);
+routes.use(taskRoutes);

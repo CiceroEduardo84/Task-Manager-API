@@ -7,7 +7,5 @@ export async function runMigrations() {
 
   sqliteConnection()
     .then((db) => db.exec(schemas))
-    .catch((error) => console.log(error));
-
-  return;
+    .catch((error) => console.error("Migration Error - ", error));
 }

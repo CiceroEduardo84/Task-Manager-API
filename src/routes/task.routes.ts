@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { taskControllers } from "../controllers/taskControllers";
-import { authMiddleware } from "../middleware/authMiddleware";
+import { authMiddleware } from "../middlewares/authMiddleware";
 
-export const tasksRoutes = Router();
+export const taskRoutes = Router();
 
-tasksRoutes.use(authMiddleware);
+taskRoutes.use(authMiddleware);
 
-tasksRoutes.post("/task", taskControllers.create);
-tasksRoutes.get("/tasks", taskControllers.read);
-tasksRoutes.put("/task/:taskId", taskControllers.update);
-tasksRoutes.delete("/task/:taskId", taskControllers.delete);
+taskRoutes.post("/task", taskControllers.create);
+taskRoutes.get("/tasks", taskControllers.read);
+taskRoutes.put("/task/:id", taskControllers.update);
+taskRoutes.delete("/task/:id", taskControllers.delete);

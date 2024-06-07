@@ -4,32 +4,34 @@ export const taskSchema = z
   .object({
     title: z
       .string({
-        required_error: "Title is required!",
-        invalid_type_error: "Title must be as string!",
+        required_error: "title is required!",
+        invalid_type_error: "title must be a string!",
       })
-      .min(3, "Title must have at least 3 characters!")
-      .max(255, "Max title length exceeded!"),
+      .min(3, "title must have at least 3 characters!")
+      .max(40, "max title length exceeded!"),
 
     description: z
       .string({
-        required_error: "Description is required!",
-        invalid_type_error: "Description must be as string!",
+        required_error: "desciption is required!",
+        invalid_type_error: "desciption must be a string!",
       })
-      .min(3, "Description must have at least 3 characters!")
-      .max(255, "Max description length exceeded!"),
+      .min(3, "desciption must have at least 3 characters!")
+      .max(255, "max desciption length exceeded!"),
 
     date: z
       .string({
-        required_error: "Date is required!",
-        invalid_type_error: "Date must be as string!",
+        required_error: "date is required!",
+        invalid_type_error: "date must be a string!",
       })
-      .datetime({ message: "Date must be UTC format" }),
+      .datetime("date must be UTC format!"),
 
-    status: z.enum(["pending", "completed"],{
-      required_error: "Status is required!",
-      invalid_type_error: "Status must be as 'pending' or 'completed'!",
-    }),
+    status: z
+      .enum(["completed", "pending"], {
+        invalid_type_error: "status must be a string!",
+        required_error: "status is required and must be 'completed' or 'pending'!",
+      })
+      .optional(),
   })
   .strict();
 
-export type TaskDataType = z.infer<typeof taskSchema>;
+export type TaskDataTypes = z.infer<typeof taskSchema>;
