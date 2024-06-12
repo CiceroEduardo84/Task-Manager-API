@@ -24,21 +24,6 @@ describe("test update task functions", async () => {
     expect(taskUpdated?.title).toEqual(task.title);
   });
 
-  it("should not update task if date be before the current time!", async () => {
-    try {
-      const pastDate = new Date("2024-05-23T00:00:00Z").toISOString();
-      const taskUpdated = await taskServices.update(
-        "1",
-        { ...task, date: pastDate },
-        taskRepositoryInMemory
-      );
-
-      if (taskUpdated) throw new Error("expected an error but the task was updated!");
-    } catch (error: any) {
-      expect(error.message).toBe("date cannot be before the current time!");
-    }
-  });
-
   it("should not update task if task not found!", async () => {
     try {
       const taskUpdated = await taskServices.update(

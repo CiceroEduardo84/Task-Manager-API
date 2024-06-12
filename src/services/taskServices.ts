@@ -61,10 +61,6 @@ export const taskServices = {
     try {
       const { title, description, date, status, user_id } = data;
 
-      if (new Date(date) < new Date()) {
-        throw appError("date cannot be before the current time!", 400);
-      }
-
       const task = await repository.getTask(id);
       if (!task) throw appError("task not found!", 404);
 
