@@ -1,5 +1,5 @@
 {
-  "name": "task-menager-api",
+  "name": "task-manager-api",
   "version": "1.0.0",
   "description": "project task manager",
   "main": "src/server.ts",
@@ -16,7 +16,7 @@
     "sql",
     "task-manager"
   ],
-  "author": "Emanuel Quintino",
+  "author": "Cicero Eduardo",
   "license": "ISC",
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
