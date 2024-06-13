@@ -18,7 +18,7 @@
 
 ```bash
 # clone project
-$ git clone https://github.com/EmanuelQuintino/Task-Manager-API.git
+$ git clone https://github.com/CiceroEduardo84/Task-Manager-API.git
 
 # install dependencies
 $ npm install
@@ -58,5 +58,5 @@ KEY_TOKEN=""
 
 ## Links
 
-- [Deploy](https://task-manager-seven-indol.vercel.app/)
-- [Front Repository](https://github.com/EmanuelQuintino/Task-Manager)
+- [Deploy](https://task-manager-gamma-plum.vercel.app/)
+- [Front Repository](https://github.com/CiceroEduardo84/Task-Manager)
