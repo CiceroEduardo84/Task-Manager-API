@@ -12,6 +12,7 @@
 - `JSON Web Token (JWT)`
 - `Bcrypt`
 - `Sqlite`
+- `Vitest`
 - `Zod`
 
 ## Installation
